@@ -19,6 +19,8 @@ public class Client {
     private Socket socket;
     private PrintWriter out;
     private BufferedReader in;
+    private JFrame frame;
+    private JPanel mainMenuPanel;
     private GamePanel gamePanel;
 
     public Client() {
@@ -49,12 +51,24 @@ public class Client {
     }
 
     private void initUI() {
-        JFrame frame = new JFrame("Game Client");
-        gamePanel = new GamePanel(this);
-        frame.add(gamePanel);
-        frame.setSize(800, 400);
+        frame = new JFrame("Game Client");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(800, 400);
+
+        mainMenuPanel = new MainMenuPanel(this);
+        gamePanel = new GamePanel(this);
+
+        frame.add(mainMenuPanel);
         frame.setVisible(true);
+    }
+
+    // Method to show the game panel
+    public void startGame() {
+        frame.remove(mainMenuPanel);
+        frame.add(gamePanel);
+        frame.revalidate();
+        frame.repaint();
+        gamePanel.requestFocusInWindow(); // Ensure the game panel gets keyboard focus
     }
 
     // Method to send score to the server
@@ -78,6 +92,23 @@ public class Client {
     }
 }
 
+// MainMenuPanel class
+class MainMenuPanel extends JPanel {
+    public MainMenuPanel(Client client) {
+        setLayout(new BorderLayout());
+
+        JButton playButton = new JButton("Play");
+        playButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                client.startGame();
+            }
+        });
+
+        add(playButton, BorderLayout.CENTER);
+    }
+}
+
 // GamePanel class as provided in your previous code
 class GamePanel extends JPanel implements ActionListener {
     private Timer timer;
@@ -92,10 +123,6 @@ class GamePanel extends JPanel implements ActionListener {
 
     public GamePanel(Client client) {
         this.client = client;
-        initGamePanel();
-    }
-    public GamePanel() {
-        this.client = null;
         initGamePanel();
     }
 
@@ -188,7 +215,7 @@ class GamePanel extends JPanel implements ActionListener {
         }
     }
 
-     private void addObstacle() {
+    private void addObstacle() {
         Random rand = new Random();
         int gapHeight = 150;
         int obstacleHeight = 50 + rand.nextInt(150);
