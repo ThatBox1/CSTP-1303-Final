@@ -1,3 +1,4 @@
+package Flappy;
 import java.awt.event.KeyEvent;
 import java.awt.Rectangle;
 

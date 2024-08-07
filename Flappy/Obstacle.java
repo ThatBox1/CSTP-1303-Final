@@ -1,3 +1,4 @@
+package Flappy;
 import java.awt.Rectangle;
 
 public class Obstacle {

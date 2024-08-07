@@ -1,3 +1,4 @@
+package Flappy;
 import javax.swing.*;
 
 public class FlappyBox extends JFrame {
