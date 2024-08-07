@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Client {
-    private static final String SERVER_ADDRESS = "localhost"; // Update to the server IP address if needed
+    private static final String SERVER_ADDRESS = "localhost"; 
     private static final int SERVER_PORT = 12346;
 
     private Socket socket;
@@ -92,7 +92,7 @@ public class Client {
     }
 }
 
-// MainMenuPanel class
+
 class MainMenuPanel extends JPanel {
     public MainMenuPanel(Client client) {
         setLayout(new BorderLayout());
@@ -109,7 +109,7 @@ class MainMenuPanel extends JPanel {
     }
 }
 
-// GamePanel class as provided in your previous code
+
 class GamePanel extends JPanel implements ActionListener {
     private Timer timer;
     private Box box;
@@ -231,7 +231,7 @@ class GamePanel extends JPanel implements ActionListener {
                 box.getY() <= 0 || box.getY() >= getHeight() - box.getHeight()) {
                 timer.stop();
                 SwingUtilities.invokeLater(() -> {
-                    int response = JOptionPane.showConfirmDialog(this, "GAME OVER. \nYour score: " + score + ". \nHigh Score: " + highScore + ". \n\nRESTART?", "Game Over", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+                    int response = JOptionPane.showConfirmDialog(this, "GAME OVER! \nYour score: " + score + ". \nHigh Score: " + highScore + ". \n\nRESTART?", "Game Over", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
                     if (response == JOptionPane.YES_OPTION) {
                         restartGame();
                     } else {

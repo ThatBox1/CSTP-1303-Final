@@ -13,7 +13,7 @@ public class Server {
 
             while (true) {
                 Socket clientSocket = serverSocket.accept();
-                System.out.println("Client connected");
+                System.out.println("A client connected");
 
                 new ClientHandler(clientSocket).start();
             }
